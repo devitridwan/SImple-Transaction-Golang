@@ -1,0 +1,48 @@
+{
+  "database": {
+    "username": "root",
+    "password": "mysql",
+    "name": "db_test",
+    "host": "localhost",
+    "port": 3306
+  },
+  "topic": {
+    "rest_base_url": "kanggo",
+    "environtment_status": "test",
+    "channel": {
+      "post": [
+        {
+          "registrasi": {
+            "rest_path": "registrasi"
+          },
+          "login": {
+            "rest_path": "login"
+          },
+          "create-product": {
+            "rest_path": "create/product"
+          },
+          "edit-product": {
+            "rest_path": "edit/product"
+          },
+          "delete-product": {
+            "rest_path": "delete/product"
+          },
+          "order-transaction": {
+            "rest_path": "order/transaction"
+          },
+          "payment-transaction": {
+            "rest_path": "payment/transaction"
+          }
+        }
+      ],
+      "get":[
+        {
+          "list-product": {
+            "rest_path": "list/product"
+          }
+        }
+      ]
+    }
+  },
+  "port": 8800
+}

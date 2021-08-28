@@ -1,0 +1,1 @@
+go run ../src/main/MainEndPoint.go --configPath=/media/dvtrdw/Data/Go/src/Ridwan/test_kanggo/properties --configName=kanggo-endpoint-properties
