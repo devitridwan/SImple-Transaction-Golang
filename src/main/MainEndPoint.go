@@ -10,16 +10,49 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	go_tools "gitlab.com/notula/go-tools3"
 	"go.uber.org/zap"
 )
 
 var logger *zap.Logger
 
+func Ekstration(target ...interface{}) error {
+	 configPath := flag.String(pathFlac, ".", "Configuration YAML path")
+	 configName := flag.String(nameFlac, "config-prod", "Configuration Name { config-prod | config-dev } (Required)")
+	 flag.Parse()
+
+	 config file path
+	viper.AddConfigPath(configPath)
+	// config file name
+	viper.SetConfigName(configName)
+
+	err := viper.ReadInConfig()
+
+	if err != nil {
+		return err
+	}
+
+	for _, element := range target {
+		err = viper.Unmarshal(&element)
+		if err != nil {
+			return err
+		}
+	}
+
+	viper.OnConfigChange(func(in fsnotify.Event) {
+		for _, element := range target {
+			err = viper.Unmarshal(&element)
+		}
+	})
+
+	return nil
+}
+
+
+
 func main() {
 	properties := &properties.EndpointProperties{}
 	fmt.Println("trace")
-	err := go_tools.Ekstration("configPath", "configName", &properties)
+	err := Ekstration("configPath", "configName", &properties)
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
