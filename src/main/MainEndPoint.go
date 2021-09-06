@@ -15,7 +15,7 @@ import (
 
 var logger *zap.Logger
 
-func Ekstration(target ...interface{}) error {
+func Ekstration(pathFlac string, nameFlac string, target ...interface{}) error {
 	 configPath := flag.String(pathFlac, ".", "Configuration YAML path")
 	 configName := flag.String(nameFlac, "config-prod", "Configuration Name { config-prod | config-dev } (Required)")
 	 flag.Parse()
